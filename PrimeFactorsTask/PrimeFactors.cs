@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PrimeFactorsTask
 {
@@ -17,11 +18,26 @@ namespace PrimeFactorsTask
         /// 8 => {2, 2, 2}
         /// 12 => {2, 2, 3}
         /// 901255 => {5, 17, 23, 461}
-        /// 93819012551 => {11, 9539, 894119}
+        /// 93819012551 => {11, 9539, 894119}.
         /// </example>
         public static int[] GetFactors(long number)
         {
-            throw new NotImplementedException("You need to implement this method.");
+            if (number <= 0)
+            {
+                throw new ArgumentException("Thrown when number less or equal 0.");
+            }
+
+            List<int> primes = new List<int>();
+            for (int i = 2; i <= number; i++)
+            {
+                while (number % i == 0)
+                {
+                    primes.Add(i);
+                    number /= i;
+                }
+            }
+
+            return primes.ToArray();
         }
     }
 }
